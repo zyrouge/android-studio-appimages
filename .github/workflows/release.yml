@@ -43,7 +43,7 @@ jobs:
               uses: ncipollo/release-action@v1
               with:
                   tag: v${{ steps.app_version.outputs.result }}
-                  artifacts: "*.AppImage,*.AppImage.zsync"
+                  artifacts: "*.AppImage"
                   generateReleaseNotes: false
                   draft: false
                   artifactErrorsFailBuild: true
