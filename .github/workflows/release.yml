@@ -29,7 +29,9 @@ jobs:
 
             - name: 🔎 Check for tag
               id: tag_exists
-              run: echo "result=$(./tag-exists.sh $TAG_NAME)" >> $GITHUB_OUTPUT
+              run: |
+                  exists=$(./tag-exists.sh $TAG_NAME)
+                  echo "result=$exists" >> $GITHUB_OUTPUT
               env:
                   TAG_NAME: v${{ steps.app_version.outputs.result }}
 
