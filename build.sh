@@ -20,7 +20,7 @@ appimage_tool_url="https://github.com/AppImage/appimagetool/releases/download/co
 
 if ! [ -f $appimage_tool ]; then
     echo "Downloading ${appimage_tool_url}"
-    curl -Ls "${appimage_tool_url}" -O "${appimage_tool}"
+    curl -L "${appimage_tool_url}" -O "${appimage_tool}"
     echo "Downloaded ${appimage_tool}"
 else
     echo "Skipping AppImageTool..."
@@ -32,7 +32,7 @@ download_url="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${app_v
 if ! [ -d $app_dir ]; then
     if ! [ -f $archive_file ]; then
         echo "Downloading ${download_url}"
-        curl -Ls "${download_url}" -O "${archive_file}"
+        curl -L "${download_url}" -O "${archive_file}"
         echo "Downloaded ${archive_file}"
     else
         echo "Skipping download..."
