@@ -48,6 +48,7 @@ jobs:
               uses: ncipollo/release-action@v1
               if: ${{ env.X_REQUIRES_BUILD == 'yes' }}
               with:
+                  body: "Version: `${{ env.X_APP_VERSION }}`"
                   tag: ${{ env.X_TAG_NAME }}
                   artifacts: "dist/*"
                   generateReleaseNotes: false
