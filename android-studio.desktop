@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=@@VERSION@@
+Type=Application
+Name=@@TITLE@@
+Icon=@@NAME@@
+Exec=AppRun %f
+Comment=The Drive to Develop
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-studio
+StartupNotify=true
