@@ -2,9 +2,10 @@
 
 set -eu
 
+curl_ua="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/118.0"
+
 self=$(readlink -f "$0")
 here=${self%/*}
-
 app_version=$1
 echo "Android Studio Version: ${app_version}"
 
@@ -17,8 +18,6 @@ appimage_arch="x86_64"
 appimage_file="${dist_dir}/${app_name}-${app_version}-${appimage_arch}.AppDir"
 appimage_tool="${here}/appimagetool.AppImage"
 appimage_tool_url="https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage"
-
-curl_ua="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/118.0"
 
 if ! [ -f $appimage_tool ]; then
     echo "Downloading ${appimage_tool_url}"
