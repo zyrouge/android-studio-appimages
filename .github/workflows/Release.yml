@@ -21,8 +21,10 @@ jobs:
                   TAG_NAME: v${{ steps.app_version.outputs.result }}
 
             - name: 🔨 Build executables
-              run: ./build.sh
+              run: ./build.sh $VERSION
               if: ${{ steps.tag_exists.outputs.result }} != "yes"
+              env:
+                  VERSION: v${{ steps.app_version.outputs.result }}
 
             - name: 🚀 Upload executables
               uses: ncipollo/release-action@v1
