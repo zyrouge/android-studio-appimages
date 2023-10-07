@@ -30,7 +30,7 @@ jobs:
             - name: 🔎 Check for tag
               id: tag_exists
               run: |
-                  exists=$(./tag-exists.sh $TAG_NAME)
+                  exists=$(./tag-exists.sh $TAG_NAME | xargs)
                   echo "result=$exists" >> $GITHUB_OUTPUT
               env:
                   TAG_NAME: v${{ steps.app_version.outputs.result }}
