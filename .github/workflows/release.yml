@@ -17,7 +17,6 @@ jobs:
         env:
             X_APP_VERSION: ""
             X_TAG_NAME: ""
-            X_TAG_EXISTS: ""
             X_REQUIRES_BUILD: ""
 
         steps:
