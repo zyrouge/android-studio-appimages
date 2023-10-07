@@ -21,7 +21,7 @@ jobs:
                   TAG_NAME: v${{ steps.app_version.outputs.result }}
 
             - name: 🔨 Build executables
-              run: ./scripts/build.sh
+              run: ./build.sh
               if: ${{ steps.tag_exists.outputs.result }} != "yes"
 
             - name: 🚀 Upload executables
