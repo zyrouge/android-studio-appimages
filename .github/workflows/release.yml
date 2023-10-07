@@ -19,7 +19,6 @@ jobs:
             X_TAG_NAME: ""
             X_TAG_EXISTS: ""
             X_REQUIRES_BUILD: ""
-            X_ALLOW_UPDATES: ""
 
         steps:
             - uses: actions/checkout@v4
@@ -37,20 +36,8 @@ jobs:
 
             - name: ♻️ Check for builds
               run: |
-                  tag_exists=$(./tag-exists.sh $X_TAG_NAME | xargs)
-                  requires_build="no"
-                  allow_release_updates="no"
-                  if [ "$tag_exists" == "no" ]; then
-                      requires_build="yes"
-                  fi
-                  if [ "$FORCE_BUILD" == "true" ]; then
-                      requires_build="yes"
-                      allow_release_updates="yes"
-                  fi
-                  echo "X_TAG_EXISTS=${tag_exists}" >> $GITHUB_ENV
+                  requires_build=$(./requires-build.sh $X_TAG_NAME | xargs)
                   echo "X_REQUIRES_BUILD=${requires_build}" >> $GITHUB_ENV
-                  echo "X_REQUIRES_BUILD=${requires_build}" >> $GITHUB_ENV
-                  echo "X_ALLOW_UPDATES=${allow_release_updates}" >> $GITHUB_ENV
               env:
                   FORCE_BUILD: ${{ inputs.force }}
 
@@ -67,6 +54,6 @@ jobs:
                   generateReleaseNotes: false
                   draft: false
                   artifactErrorsFailBuild: true
-                  allowUpdates: ${{ env.X_ALLOW_UPDATES == 'yes' }}
-                  replacesArtifacts: ${{ env.X_ALLOW_UPDATES == 'yes' }}
+                  allowUpdates: true
+                  replacesArtifacts: true
                   makeLatest: true
