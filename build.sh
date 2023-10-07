@@ -21,12 +21,13 @@ appimage_tool_url="https://github.com/AppImage/appimagetool/releases/download/co
 if ! [ -f $appimage_tool ]; then
     echo "Downloading ${appimage_tool_url}"
     curl -L "${appimage_tool_url}" -o "${appimage_tool}"
+    chmod +x "${appimage_tool}"
     echo "Downloaded ${appimage_tool}"
 else
     echo "Skipping AppImageTool..."
 fi
 
-archive_file="${here}/android-studio.tar.gz"
+archive_file="${here}/android-studio-${app_version}-linux.tar.gz"
 download_url="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${app_version}/android-studio-${app_version}-linux.tar.gz"
 
 if ! [ -d $app_dir ]; then
@@ -67,4 +68,5 @@ echo "Initialized ${app_dir}"
 
 echo "Building ${app_dir}"
 ARCH=$appimage_arch ./appimagetool.AppImage "${app_dir}" "${appimage_file}"
+chmod +x "${appimage_file}"
 echo "Created ${appimage_file}"
