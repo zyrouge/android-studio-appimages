@@ -21,7 +21,7 @@ jobs:
             - name: 🚧 Prerequistes
               run: |
                   sudo apt-get update
-                  sudo apt-get install zsync desktop-file-utils
+                  sudo apt-get install desktop-file-utils
 
             - name: 🔢 Get version
               id: app_version
