@@ -33,7 +33,7 @@ jobs:
               run: ./build.sh $VERSION
               if: ${{ steps.tag_exists.outputs.result != 'yes' || inputs.force }}
               env:
-                  VERSION: v${{ steps.app_version.outputs.result }}
+                  VERSION: ${{ steps.app_version.outputs.result }}
 
             - name: 🚀 Upload executables
               uses: ncipollo/release-action@v1
