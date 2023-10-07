@@ -14,13 +14,14 @@ app_dir="${here}/${app_name}.AppDir"
 tag_name="v${app_version}"
 appimage_arch="x86_64"
 appimage_file="${here}/${app_name}-${app_version}-${appimage_arch}.AppDir"
-
 appimage_tool="${here}/appimagetool.AppImage"
 appimage_tool_url="https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage"
 
+curl_ua="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/118.0"
+
 if ! [ -f $appimage_tool ]; then
     echo "Downloading ${appimage_tool_url}"
-    curl -L "${appimage_tool_url}" -o "${appimage_tool}"
+    curl -v -L -A "${curl_ua}" "${appimage_tool_url}" -o "${appimage_tool}"
     chmod +x "${appimage_tool}"
     echo "Downloaded ${appimage_tool}"
 else
@@ -33,7 +34,7 @@ download_url="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${app_v
 if ! [ -d $app_dir ]; then
     if ! [ -f $archive_file ]; then
         echo "Downloading ${download_url}"
-        curl -L "${download_url}" -o "${archive_file}"
+        curl -v -L -A "${curl_ua}" "${download_url}" -o "${archive_file}"
         echo "Downloaded ${archive_file}"
     else
         echo "Skipping download..."
