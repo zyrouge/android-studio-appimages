@@ -37,7 +37,7 @@ jobs:
 
             - name: 🔨 Build executables
               run: ./build.sh $VERSION
-              if: ${{ steps.tag_exists.outputs.result != 'true' || inputs.force }}
+              if: ${{ steps.tag_exists.outputs.result != 'yes' || inputs.force }}
               env:
                   VERSION: ${{ steps.app_version.outputs.result }}
 

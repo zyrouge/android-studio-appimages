@@ -6,7 +6,7 @@ tag=$1
 git ls-remote --exit-code --tags origin $tag
 status=$?
 if [ $status == 0 ]; then
-    echo true
+    echo "yes"
 else
-    echo false
+    echo "no"
 fi
