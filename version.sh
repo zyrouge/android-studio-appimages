@@ -2,8 +2,8 @@
 
 set -eu
 
-page=$(curl -s https://developer.android.com/studio/preview)
-filename=$(echo "$page" | grep -m 1 "linux.tar.gz")
-version=$(echo "$filename" | sed -nr 's/.*android-studio-(.*?)-linux\.tar\.gz.*/\1/p')
+data=$(curl -s https://developer.android.com/studio/preview)
+data=$(echo "${data}" | awk '/data-category="beta_linux_bundle_download"/,/id="agree-button__beta_linux_bundle_download"/ { print }')
+version=$(echo "${data}" | sed -nr 's/.*\/ide-zips\/(.*?)\/.*/\1/p')
 
-echo "$version"
+echo "${version}"
