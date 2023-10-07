@@ -63,7 +63,7 @@ jobs:
               if: ${{ env.X_REQUIRES_BUILD == 'yes' }}
               with:
                   tag: ${{ env.X_TAG_NAME }}
-                  artifacts: "*.AppImage"
+                  artifacts: "dist/*"
                   generateReleaseNotes: false
                   draft: false
                   artifactErrorsFailBuild: true

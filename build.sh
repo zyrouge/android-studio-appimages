@@ -13,7 +13,7 @@ app_name="android-studio"
 app_dir="${here}/${app_name}.AppDir"
 tag_name="v${app_version}"
 appimage_arch="x86_64"
-appimage_file="${here}/${app_name}-${app_version}-${appimage_arch}.AppDir"
+appimage_file="${here}/dist/${app_name}-${app_version}-${appimage_arch}.AppDir"
 appimage_tool="${here}/appimagetool.AppImage"
 appimage_tool_url="https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage"
 
