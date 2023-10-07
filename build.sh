@@ -21,7 +21,7 @@ curl_ua="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/118.0"
 
 if ! [ -f $appimage_tool ]; then
     echo "Downloading ${appimage_tool_url}"
-    curl -v -L -A "${curl_ua}" "${appimage_tool_url}" -o "${appimage_tool}"
+    curl -Ls -A "${curl_ua}" "${appimage_tool_url}" -o "${appimage_tool}"
     chmod +x "${appimage_tool}"
     echo "Downloaded ${appimage_tool}"
 else
@@ -34,7 +34,7 @@ download_url="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${app_v
 if ! [ -d $app_dir ]; then
     if ! [ -f $archive_file ]; then
         echo "Downloading ${download_url}"
-        curl -v -L -A "${curl_ua}" "${download_url}" -o "${archive_file}"
+        curl -Ls -A "${curl_ua}" "${download_url}" -o "${archive_file}"
         echo "Downloaded ${archive_file}"
     else
         echo "Skipping download..."

@@ -15,7 +15,8 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            - run: |
+            - name: 🚧 Prerequistes
+              run: |
                   sudo apt-get update
                   sudo apt-get install zsync
 
