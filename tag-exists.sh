@@ -1,12 +1,15 @@
 #!/bin/bash
 
-set -u
+if ! [ -n "$1" ]; then
+    echo "error: Missing version argument"
+    exit 1
+fi
 
 tag=$1
-git ls-remote --exit-code --tags origin $tag
-status=$?
-if [ $status == 0 ]; then
-    echo "yes"
-else
+output=$(git ls-remote --exit-code --tags origin "$tag")
+
+if [ "$output" == "" ]; then
     echo "no"
+else
+    echo "yes"
 fi

@@ -14,6 +14,12 @@ permissions:
 jobs:
     release:
         runs-on: ubuntu-latest
+        env:
+            X_APP_VERSION: ""
+            X_TAG_NAME: ""
+            X_TAG_EXISTS: ""
+            X_REQUIRES_BUILD: ""
+            X_ALLOW_UPDATES: ""
 
         steps:
             - uses: actions/checkout@v4
@@ -24,31 +30,43 @@ jobs:
                   sudo apt-get install desktop-file-utils
 
             - name: 🔢 Get version
-              id: app_version
-              run: echo "result=$(./version.sh)" >> $GITHUB_OUTPUT
-
-            - name: 🔎 Check for tag
-              id: tag_exists
               run: |
-                  exists=$(./tag-exists.sh $TAG_NAME | xargs)
-                  echo "result=$exists" >> $GITHUB_OUTPUT
+                  version=$(./version.sh | xargs)
+                  echo "X_APP_VERSION=${version}" >> $GITHUB_ENV
+                  echo "X_TAG_NAME=v${version}" >> $GITHUB_ENV
+
+            - name: ♻️ Check for builds
+              run: |
+                  tag_exists=$(./tag-exists.sh $X_TAG_NAME | xargs)
+                  requires_build="no"
+                  allow_release_updates="no"
+                  if [ "$tag_exists" == "no" ]; then
+                      requires_build="yes"
+                  fi
+                  if [ "$FORCE_BUILD" == "true" ]; then
+                      requires_build="yes"
+                      allow_release_updates="yes"
+                  fi
+                  echo "X_TAG_EXISTS=${tag_exists}" >> $GITHUB_ENV
+                  echo "X_REQUIRES_BUILD=${requires_build}" >> $GITHUB_ENV
+                  echo "X_REQUIRES_BUILD=${requires_build}" >> $GITHUB_ENV
+                  echo "X_ALLOW_UPDATES=${allow_release_updates}" >> $GITHUB_ENV
               env:
-                  TAG_NAME: v${{ steps.app_version.outputs.result }}
+                  FORCE_BUILD: ${{ inputs.force }}
 
             - name: 🔨 Build executables
-              run: ./build.sh $VERSION
-              if: ${{ steps.tag_exists.outputs.result != 'yes' || inputs.force }}
-              env:
-                  VERSION: ${{ steps.app_version.outputs.result }}
+              run: ./build.sh $X_APP_VERSION
+              if: ${{ env.X_REQUIRES_BUILD == 'yes' }}
 
             - name: 🚀 Upload executables
               uses: ncipollo/release-action@v1
+              if: ${{ env.X_REQUIRES_BUILD == 'yes' }}
               with:
-                  tag: v${{ steps.app_version.outputs.result }}
+                  tag: ${{ env.X_TAG_NAME }}
                   artifacts: "*.AppImage"
                   generateReleaseNotes: false
                   draft: false
                   artifactErrorsFailBuild: true
-                  allowUpdates: ${{ inputs.force }}
-                  replacesArtifacts: ${{ inputs.force }}
+                  allowUpdates: ${{ env.X_ALLOW_UPDATES == 'yes' }}
+                  replacesArtifacts: ${{ env.X_ALLOW_UPDATES == 'yes' }}
                   makeLatest: true
