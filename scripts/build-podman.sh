@@ -12,7 +12,7 @@ container_name="android-studio-preview-appimage"
 work_dir="/android-studio-preview-appimage"
 
 echo "Starting container..."
-podman run --rm -dti --name "${container_name}" ubuntu:20.04
+podman run --rm -dti --name "${container_name}" docker.io/library/ubuntu:20.04
 podman wait --condition=running "${container_name}"
 
 echo "Installing dependencies..."
