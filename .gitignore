@@ -1,4 +1,2 @@
+artifacts
 dist
-*.AppDir
-*.tar.gz
-*.AppImage

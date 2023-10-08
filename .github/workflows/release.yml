@@ -27,23 +27,23 @@ jobs:
             - name: 🚧 Prerequistes
               run: |
                   sudo apt-get update
-                  sudo apt-get install desktop-file-utils
+                  sudo apt-get install -y podman
 
             - name: 🔢 Get version
               run: |
-                  version=$(./version.sh | xargs)
+                  version=$(./scripts/version.sh | xargs)
                   echo "X_APP_VERSION=${version}" >> $GITHUB_ENV
                   echo "X_TAG_NAME=v${version}" >> $GITHUB_ENV
 
             - name: ♻️ Check for builds
               run: |
-                  requires_build=$(./requires-build.sh $X_TAG_NAME | xargs)
+                  requires_build=$(./scripts/requires-build.sh $X_TAG_NAME | xargs)
                   echo "X_REQUIRES_BUILD=${requires_build}" >> $GITHUB_ENV
               env:
                   FORCE_BUILD: ${{ inputs.force }}
 
             - name: 🔨 Build executables
-              run: ./build.sh $X_APP_VERSION
+              run: ./scripts/build-podman.sh $X_APP_VERSION
               if: ${{ env.X_REQUIRES_BUILD == 'yes' }}
 
             - name: 🚀 Upload executables
