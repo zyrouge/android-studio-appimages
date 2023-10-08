@@ -17,7 +17,7 @@ podman wait --condition=running "${container_name}"
 
 echo "Installing dependencies..."
 podman exec "${container_name}" apt update
-podman exec "${container_name}" apt-get install -y curl desktop-file-utils imagemagick
+podman exec "${container_name}" apt-get install -y curl desktop-file-utils imagemagick file
 
 echo "Copying necessities..."
 podman exec "${container_name}" mkdir "${work_dir}"
