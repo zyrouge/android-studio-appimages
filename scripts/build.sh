@@ -17,18 +17,29 @@ echo "Android Studio Version: ${app_version}"
 app_title="Android Studio"
 app_name="android-studio"
 
-appimagetool="${artifacts_dir}/appimagetool.AppImage"
+appimagetool_path="${artifacts_dir}/appimagetool.AppImage"
+appimagetool_app_dir="${artifacts_dir}/appimagetool.AppDir"
+appimagetool="${appimagetool_app_dir}/AppRun"
 appimagetool_url="https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage"
 
 mkdir -p "${artifacts_dir}"
-if ! [ -f "${appimagetool}" ]; then
+if ! [ -f "${appimagetool_path}" ]; then
     echo "Downloading ${appimagetool_url}"
-    curl -Ls -A "${curl_ua}" "${appimagetool_url}" -o "${appimagetool}"
-    echo "Downloaded ${appimagetool}"
+    curl -Ls -A "${curl_ua}" "${appimagetool_url}" -o "${appimagetool_path}"
+    echo "Downloaded ${appimagetool_path}"
 else
     echo "Skipping AppImageTool..."
 fi
-chmod +x "${appimagetool}"
+if ! [ -d "${appimagetool_app_dir}" ]; then
+    echo "Extracting ${appimagetool_path}"
+    cd "${artifacts_dir}"
+    "${appimagetool_path}" --appimage-extract
+    mv ./squashfs-root "${appimagetool_app_dir}"
+    cd ..
+    echo "Created ${appimagetool_app_dir}"
+else
+    echo "Skipping extracting ${appimagetool_path}"
+fi
 
 app_dir="${artifacts_dir}/${app_name}.AppDir"
 archive_file="${artifacts_dir}/android-studio-${app_version}-linux.tar.gz"
