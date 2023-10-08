@@ -1,5 +1,3 @@
-![Banner](./logo.png)
-
 # Android Studio Preview AppImages
 
 ![![Latest](https://github.com/zyrouge/android-studio-preview-appimage/releases/latest)](https://img.shields.io/github/v/release/zyrouge/android-studio-preview-appimage)
