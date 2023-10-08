@@ -30,6 +30,7 @@ if ! [ -f "${appimagetool_path}" ]; then
 else
     echo "Skipping AppImageTool..."
 fi
+chmod +x "${appimagetool_path}"
 if ! [ -d "${appimagetool_app_dir}" ]; then
     echo "Extracting ${appimagetool_path}"
     cd "${artifacts_dir}"
