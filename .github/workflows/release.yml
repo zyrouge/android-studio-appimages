@@ -43,7 +43,9 @@ jobs:
                   FORCE_BUILD: ${{ inputs.force }}
 
             - name: 🔨 Build executables
-              run: ./scripts/build-podman.sh $X_APP_VERSION
+              run: |
+                  find ./scripts -type f -name "*.sh" -exec chmod +x {} \;
+                  ./scripts/build-podman.sh $X_APP_VERSION
               if: ${{ env.X_REQUIRES_BUILD == 'yes' }}
 
             - name: 🚀 Upload executables

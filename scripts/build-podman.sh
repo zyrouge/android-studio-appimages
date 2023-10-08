@@ -19,6 +19,7 @@ podman exec "${container_name}" mkdir "${work_dir}"
 for x in "scripts" "templates"; do
     podman copy "./${x}" "${container_name}:${work_dir}/${x}"
 done
+podman exec find "${work_dir}/scripts" -type f -name "*.sh" -exec chmod +x {} \;
 podman exec "${work_dir}/scripts/build.sh" "${app_version}"
 podman copy "${container_name}:${work_dir}/dist" "${dist_dir}"
 podman stop "${container_name}"
