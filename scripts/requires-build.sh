@@ -20,7 +20,7 @@ data=$(curl -s -A "${curl_ua}" "${api_url}")
 appimages_count=$(echo "${data}" | grep -c '.AppImage"')
 requires_build="no"
 
-if [ "$appimages_count" == "0" ]; then
+if [ "${appimages_count}" == "0" ]; then
     requires_build="yes"
 fi
 
