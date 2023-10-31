@@ -9,8 +9,9 @@ here=${self%/*}
 root_dir=$(dirname "${here}")
 artifacts_dir="${root_dir}/artifacts"
 dist_dir="${root_dir}/dist"
-desktop_template_file="${root_dir}/templates"
-apprun_template_file="${root_dir}/templates"
+templates_dir="${root_dir}/templates"
+desktop_template_file="${templates_dir}/android-studio.desktop"
+apprun_template_file="${templates_dir}/AppRun"
 
 app_version=$1
 app_release=$2
