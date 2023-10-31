@@ -5,9 +5,9 @@
 [![Release](https://github.com/zyrouge/android-studio-appimages/actions/workflows/release.yml/badge.svg)](https://github.com/zyrouge/android-studio-appimages/actions/workflows/release.yml)
 [![Badges](https://github.com/zyrouge/android-studio-appimages/actions/workflows/badges.yml/badge.svg)](https://github.com/zyrouge/android-studio-appimages/actions/workflows/badges.yml)
 
-Packages [Android Studio Preview](https://developer.android.com/studio/preview) as AppImages.
+Packages [Android Studio](https://developer.android.com/studio) and [Android Studio Preview](https://developer.android.com/studio/preview) as AppImages.
 
-AppImages are directly created from `.tar.gz` builds and are not decompiled or modified. AppImages are compiled in Ubuntu 20.04.
+AppImages are directly created from `.tar.gz` builds and are not decompiled or modified. AppImages are compiled in Ubuntu 20.04. Latest releases contain stable version and pre-releases contain beta version.
 
 ## Supported Builds
 
@@ -21,10 +21,10 @@ This command requires [Pho](https://github.com/zyrouge/pho) to be installed.
 
 ```bash
 # stable
-pho install github --release prerelease --id android-studio zyrouge/android-studio-appimages
+pho install github --id android-studio zyrouge/android-studio-appimages
 
 # beta
-pho install github --id android-studio zyrouge/android-studio-appimages
+pho install github --release prerelease --id android-studio zyrouge/android-studio-appimages
 ```
 
 ### Manual
