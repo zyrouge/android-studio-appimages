@@ -7,9 +7,10 @@ curl_ua="Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/118.0"
 self=$(readlink -f "$0")
 here=${self%/*}
 root_dir=$(dirname "${here}")
-templates_dir="${root_dir}/templates"
 artifacts_dir="${root_dir}/artifacts"
 dist_dir="${root_dir}/dist"
+desktop_template_file="${root_dir}/templates"
+apprun_template_file="${root_dir}/templates"
 
 app_version=$1
 app_release=$2
@@ -44,7 +45,7 @@ appimagetool_url="https://github.com/AppImage/appimagetool/releases/download/con
 mkdir -p "${artifacts_dir}"
 if ! [ -f "${appimagetool_path}" ]; then
     echo "Downloading ${appimagetool_url}"
-    curl -Ls -A "${curl_ua}" "${appimagetool_url}" -o "${appimagetool_path}"
+    curl --fail -Ls -A "${curl_ua}" "${appimagetool_url}" -o "${appimagetool_path}"
     echo "Downloaded ${appimagetool_path}"
 else
     echo "Skipping AppImageTool..."
@@ -68,7 +69,7 @@ download_url="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/${app_v
 if ! [ -d "${app_dir}" ]; then
     if ! [ -f "${archive_file}" ]; then
         echo "Downloading ${download_url}"
-        curl -Ls -A "${curl_ua}" "${download_url}" -o "${archive_file}"
+        curl --fail -Ls -A "${curl_ua}" "${download_url}" -o "${archive_file}"
         echo "Downloaded ${archive_file}"
     else
         echo "Skipping download..."
@@ -93,11 +94,11 @@ for x in "256x256" "512x512" "1024x1024"; do
     mkdir -p "${icon_dir}"
     convert "${d_icon}" -resize "${x}" "${icon_dir}/${app_name}.png"
 done
-desktop_content=$(cat "${templates_dir}/${app_name}.desktop")
+desktop_content=$(cat "${desktop_template_file}")
 desktop_content="${desktop_content//@@TITLE@@/${app_title}}"
 desktop_content="${desktop_content//@@NAME@@/${app_name}}"
 echo "${desktop_content}" >"${app_dir}/${app_name}.desktop"
-cp "${templates_dir}/AppRun" "${app_dir}/AppRun"
+cp "${apprun_template_file}" "${app_dir}/AppRun"
 echo "Initialized ${app_dir}"
 
 appimage_arch="x86_64"

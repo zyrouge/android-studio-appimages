@@ -13,10 +13,10 @@ if [ "${X_FORCE_BUILD}" == "true" ]; then
 fi
 
 tag_name=$1
-repo="zyrouge/android-studio-appimage"
+repo="zyrouge/android-studio-appimages"
 
 api_url="https://api.github.com/repos/${repo}/releases/tags/${tag_name}"
-data=$(curl -s -A "${curl_ua}" "${api_url}")
+data=$(curl --fail -s -A "${curl_ua}" "${api_url}")
 appimages_count=$(echo "${data}" | grep -c '.AppImage"')
 requires_build="no"
 
