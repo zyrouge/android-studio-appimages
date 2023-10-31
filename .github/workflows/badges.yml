@@ -23,6 +23,7 @@ jobs:
                           owner: context.repo.owner,
                           repo: context.repo.repo,
                       });
+                      console.log(releases);
                       const latest = releases.find(x => !x.draft && !x.prerelease);
                       const prerelease = releases.find(x => !x.draft && x.prerelease);
                       const outputDir = p.join(process.cwd(), "dist-badges");
