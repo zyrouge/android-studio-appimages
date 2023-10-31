@@ -1,0 +1,51 @@
+name: Badges
+
+on:
+    workflow_call:
+    workflow_dispatch:
+
+permissions:
+    contents: write
+
+jobs:
+    generate-badges:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: 📝 Generate badges
+              uses: actions/github-script@v6
+              with:
+                  script: |
+                      const p = require("path");
+                      const fs = require("fs/promises");
+                      const releases = await octokit.rest.repos.listReleases({
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                      });
+                      const latest = releases.find(x => !x.draft && !x.prerelease);
+                      const prerelease = releases.find(x => !x.draft && x.prerelease);
+                      const outputDir = p.join(process.cwd(), "dist-badges");
+                      await fs.mkdir(outputDir, { recursive: true });
+                      await fs.writeFile(p.join(outputDir, "badge-latest.json"), JSON.stringify({
+                          schemaVersion: 1,
+                          label: "latest",
+                          message: latest?.tag_name ?? "unknown",
+                          color: "blue",
+                      }));
+                      await fs.writeFile(p.join(outputDir, "badge-prerelease.json"), JSON.stringify({
+                          schemaVersion: 1,
+                          label: "latest (pre-release)",
+                          message: prerelease?.tag_name ?? "unknown",
+                          color: "blue",
+                      }));
+
+            - name: 📝 Generate badges
+              uses: zyrouge/github-push-action@v1
+              with:
+                  local-username: "[actions] generate-badges"
+                  directory: dist-badges
+                  branch: dist-badges
+                  force: true
+                  skip-fetch: true
+                  checkout-orphan: true

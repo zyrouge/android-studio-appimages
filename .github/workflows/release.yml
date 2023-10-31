@@ -88,3 +88,8 @@ jobs:
                   replacesArtifacts: true
                   makeLatest: true
                   prerelease: ${{ env.X_APP_RELEASE == 'beta' }}
+
+    generate-badge:
+        needs: [release]
+        if: always()
+        uses: ./.github/workflows/badges.yml
