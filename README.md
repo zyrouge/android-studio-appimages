@@ -1,8 +1,9 @@
 # Android Studio AppImages
 
-[![Latest](https://img.shields.io/github/v/release/zyrouge/android-studio-appimages)](https://github.com/zyrouge/android-studio-appimages/releases/latest)
-[![Latest (Pre-release)](https://img.shields.io/github/v/tag/zyrouge/android-studio-appimages?label=latest-nightly)](https://github.com/zyrouge/android-studio-appimages/releases)
+[![Latest](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fzyrouge%2Fandroid-studio-appimages%2Fdist-badges%2Fbadge-latest.json)](https://github.com/zyrouge/android-studio-appimages/releases/latest)
+[![Latest (Pre-release)](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fzyrouge%2Fandroid-studio-appimages%2Fdist-badges%2Fbadge-prerelease.json)](https://github.com/zyrouge/android-studio-appimages/releases)
 [![Release](https://github.com/zyrouge/android-studio-appimages/actions/workflows/release.yml/badge.svg)](https://github.com/zyrouge/android-studio-appimages/actions/workflows/release.yml)
+[![Badges](https://github.com/zyrouge/android-studio-appimages/actions/workflows/badges.yml/badge.svg)](https://github.com/zyrouge/android-studio-appimages/actions/workflows/badges.yml)
 
 Packages [Android Studio Preview](https://developer.android.com/studio/preview) as AppImages.
 
