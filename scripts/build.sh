@@ -12,10 +12,29 @@ artifacts_dir="${root_dir}/artifacts"
 dist_dir="${root_dir}/dist"
 
 app_version=$1
+app_release=$2
 echo "Android Studio Version: ${app_version}"
+echo "Android Studio Release: ${app_release}"
 
 app_title="Android Studio"
 app_name="android-studio"
+
+case "${app_release}" in
+"stable")
+    app_title="Android Studio"
+    app_name="android-studio"
+    ;;
+
+"beta")
+    app_title="Android Studio (Beta)"
+    app_name="android-studio-beta"
+    ;;
+
+*)
+    echo "Unknown release type: ${app_release}"
+    exit 1
+    ;;
+esac
 
 appimagetool_path="${artifacts_dir}/appimagetool.AppImage"
 appimagetool_app_dir="${artifacts_dir}/appimagetool.AppDir"

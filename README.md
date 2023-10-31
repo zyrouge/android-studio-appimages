@@ -1,4 +1,4 @@
-# Android Studio Preview AppImages
+# Android Studio AppImages
 
 ![![Latest](https://github.com/zyrouge/android-studio-preview-appimage/releases/latest)](https://img.shields.io/github/v/release/zyrouge/android-studio-preview-appimage)
 [![Release](https://github.com/zyrouge/android-studio-preview-appimage/actions/workflows/release.yml/badge.svg)](https://github.com/zyrouge/android-studio-preview-appimage/actions/workflows/release.yml)

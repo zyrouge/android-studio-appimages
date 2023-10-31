@@ -7,8 +7,13 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
+if [ "${X_FORCE_BUILD}" == "true" ]; then
+    echo "yes"
+    exit 0
+fi
+
 tag_name=$1
-repo="zyrouge/android-studio-preview-appimage"
+repo="zyrouge/android-studio-appimage"
 
 api_url="https://api.github.com/repos/${repo}/releases/tags/${tag_name}"
 data=$(curl -s -A "${curl_ua}" "${api_url}")
